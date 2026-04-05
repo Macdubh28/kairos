@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="KAIROS â Plateforme de maÃ®trise de soi et de philosophie stoÃ¯cienne. Citations, journal, mÃ©ditation, principes.">
+  <meta name="description" content="KAIROS — Plateforme de maîtrise de soi et de philosophie stoïcienne. Citations, journal, méditation, principes.">
   <meta name="theme-color" content="#0A0A0A">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="KAIROS">
-  <meta property="og:title" content="KAIROS â MaÃ®trise de Soi">
-  <meta property="og:description" content="La maÃ®trise de soi comme art de vivre">
+  <meta property="og:title" content="KAIROS — Maîtrise de Soi">
+  <meta property="og:description" content="La maîtrise de soi comme art de vivre">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://macdubh28.github.io/kairos/">
   <link rel="manifest" href="manifest.json">
-  <title>KAIROS â MaÃ®trise de Soi</title>
+  <title>KAIROS — Maîtrise de Soi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -313,7 +313,7 @@
     .timer-circle-prog {
       fill:none; stroke:var(--accent); stroke-width:1.5;
       stroke-linecap:round;
-      stroke-dasharray: 753.98; /* 2Ï Ã 120 */
+      stroke-dasharray: 753.98; /* 2π × 120 */
       stroke-dashoffset: 0;
       transition: stroke-dashoffset 1s linear;
     }
@@ -349,65 +349,94 @@
     }
     .journal-dateline {
       font-size:.65rem; letter-spacing:.2em; text-transform:uppercase;
-      color:var(--accent); margin-bottom:1.25rem;
+      color:var(--accent); margin-bottom:1.5rem;
     }
-    .journal-textarea {
-      width:100%; background:none; border:none;
-      border-bottom:1px solid var(--border);
-      color:var(--text-primary); font-family:var(--font-display);
-      font-size:1.05rem; font-style:italic;
-      line-height:1.85; padding:.75rem 0; resize:none; min-height:140px; outline:none;
-      transition: border-color var(--ease);
-    }
-    .journal-textarea::placeholder { color:var(--text-secondary); opacity:.45; }
-    .journal-textarea:focus { border-bottom-color:var(--accent); }
-    .journal-prompts { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1.25rem; }
+    .journal-prompts { margin-bottom:1.5rem; }
+    .journal-prompt-label { font-size:.68rem; color:var(--text-secondary); margin-bottom:.5rem; }
+    .prompt-chips { display:flex; flex-wrap:wrap; gap:.5rem; }
     .prompt-chip {
-      font-size:.65rem; border:1px solid var(--border); color:var(--text-secondary);
-      padding:.25rem .75rem; cursor:pointer; transition: var(--ease); user-select:none;
+      background:none; border:1px solid var(--border); color:var(--text-secondary);
+      padding:.35rem .8rem; font-size:.68rem; cursor:pointer; transition: var(--ease);
+      font-family:var(--font-body);
     }
     .prompt-chip:hover { border-color:var(--accent); color:var(--accent); }
-    .journal-bottom { display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; }
+    .journal-input {
+      width:100%; background:var(--bg-primary); border:1px solid var(--border);
+      color:var(--text-primary); padding:1rem; font-family:var(--font-body);
+      font-size:.85rem; line-height:1.7; resize:vertical; margin-bottom:1rem;
+      transition: border-color var(--ease);
+    }
+    .journal-input:focus { outline:none; border-color:var(--accent); }
+    .journal-footer { display:flex; justify-content:space-between; align-items:center; }
     .journal-stats { font-size:.65rem; color:var(--text-secondary); letter-spacing:.1em; }
-    .journal-entries { display:flex; flex-direction:column; gap:1px; }
+    .journal-entries { margin-top:2rem; }
     .journal-entry {
-      background:var(--bg-card); border:1px solid var(--border);
-      padding:1.5rem 2.5rem; position:relative;
+      border-bottom:1px solid var(--border); padding:1.5rem 0; position:relative;
     }
-    .journal-entry-date {
-      font-size:.62rem; letter-spacing:.2em; text-transform:uppercase;
-      color:var(--text-secondary); margin-bottom:.75rem;
-    }
-    .journal-entry-text {
-      font-family:var(--font-display); font-size:.98rem;
-      font-style:italic; color:var(--text-primary); line-height:1.75;
-    }
+    .journal-entry-date { font-size:.62rem; letter-spacing:.15em; color:var(--accent); text-transform:uppercase; margin-bottom:.5rem; }
+    .journal-entry-text { font-size:.85rem; color:var(--text-secondary); line-height:1.75; }
     .journal-del {
-      position:absolute; top:1rem; right:1.25rem; background:none; border:none;
-      color:var(--text-secondary); cursor:pointer; font-size:.75rem;
-      opacity:0; transition: var(--ease);
+      position:absolute; top:1.5rem; right:0;
+      background:none; border:none; color:var(--text-secondary);
+      font-size:1rem; cursor:pointer; opacity:.4;
+      transition: opacity var(--ease);
     }
-    .journal-entry:hover .journal-del { opacity:1; }
-    .journal-del:hover { color:#e55; }
-    .journal-empty { color:var(--text-secondary); font-size:.87rem; text-align:center; padding:2.5rem; }
+    .journal-del:hover { opacity:1; }
+    .journal-empty { font-size:.85rem; color:var(--text-secondary); text-align:center; padding:3rem 0; }
 
     /* ==============================
        SECTION: PROGRESSION
     ============================== */
     #progression { background:var(--bg-secondary); }
-    .streak-wrap { display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; margin-bottom:3rem; }
-    .streak-card {
+    .stats-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:3rem;
+    }
+    .stat-card {
       background:var(--bg-card); border:1px solid var(--border);
-      padding:2rem 3rem; text-align:center; min-width:180px;
+      padding:2rem; text-align:center;
     }
-    .streak-num {
-      font-family:var(--font-display); font-size:4rem; font-weight:300;
-      color:var(--accent); line-height:1;
+    .stat-value {
+      font-family:var(--font-display); font-size:clamp(2.5rem,6vw,4rem);
+      font-weight:300; color:var(--accent); line-height:1;
     }
-    .streak-label { font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:var(--text-secondary); margin-top:.5rem; }
-    .streak-calendar { display:grid; grid-template-columns:repeat(7, 1fr); gap:4px; max-width:320px; margin:0 auto; }
+    .stat-label { font-size:.62rem; letter-spacing:.15em; color:var(--text-secondary); text-transform:uppercase; margin-top:.5rem; }
+    .streak-calendar {
+      display:grid; grid-template-columns:repeat(15,1fr); gap:4px;
+    }
     .cal-day {
-      aspect-ratio:1; border-radius:2px; background:var(--border);
+      aspect-ratio:1; border-radius:2%;
+      background:var(--border);
+    }
+    .cal-day.active { background:var(--accent-dim); }
+    .cal-day.today { background:var(--accent); }
+
+    /* ==============================
+       SECTION: RESSOURCES
+=============================== */
+    #ressources { background:var(--bg-primary); }
+    .ressources-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem;
+    }
+    .ressource-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--r); padding:2rem;
+      transition: transform var(--ease), border-color var(--ease);
+      cursor:pointer;
+    }
+    .ressource-card:hover { transform:translateY(-3px); border-color:var(--accent-dim); }
+    .ressource-type { font-size:.58rem; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; margin-bottom:.75rem; }
+    .ressource-title { font-family:var(--font-display); font-size:1.1rem; margin-bottom:.5rem; }
+    .ressource-author { font-size:.75rem; color:var(--text-secondary); }
+
+    /* ==============================
+       FOOTER
+=============================== */
+    #footer {
+      background:var(--bg-secondary); border-top:1px solid var(--border);
+      padding:3rem 2rem; text-align:center;
+    }
+    .footer-logo { font-family:var(--font-display); font-size:1.4rem; font-weight:600; letter-spacing:.35em; color:var(--accent); margin-bottom:.rem; }
+    .footer-tagline { font-size:.75rem; color:var(--text-secondary); margin-bottom:1.5rem; }order-radius:2px; background:var(--border);
       transition: var(--ease);
     }
     .cal-day.active { background: var(--accent); opacity:.7; }
@@ -479,84 +508,53 @@
       .quote-card { padding:2.5rem 1.5rem; }
       .timer-svg { width:200px; height:200px; }
       .timer-circle-bg, .timer-circle-prog { /* r stays 120 */ }
-      .footer-links { gap:1.5rem; flex-wrap:wrap; }
-    }
-    @media (max-width: 480px) {
-      .hero-title { letter-spacing:.08em; }
-      .streak-wrap { gap:1rem; }
-      .streak-card { padding:1.5rem 2rem; min-width:130px; }
+      .footer-links { gap:1.5rem; }
+      .stats-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
-
 <body>
 
-<!-- ========================
-     NAVIGATION
-======================== -->
+<!-- ============================================================
+   NAVBAR
+============================================================ -->
 <nav id="navbar">
-  <a href="#hero" class="nav-logo">Kairos</a>
+  <a href="#" class="nav-logo">KAIROS</a>
   <ul class="nav-links">
-    <li><a href="#philosophie">Philosophie</a></li>
-    <li><a href="#citation">Citations</a></li>
-    <li><a href="#principes">Principes</a></li>
-    <li><a href="#pratiques">Pratiques</a></li>
-    <li><a href="#minuteur">MÃ©ditation</a></li>
-    <li><a href="#journal">Journal</a></li>
-    <li><a href="#progression">Progression</a></li>
-    <li><a href="#ressources">Ressources</a></li>
+    <li><a href="#philosophie" onclick="closeMenu()">Philosophie</a></li>
+    <li><a href="#citation" onclick="closeMenu()">Citations</a></li>
+    <li><a href="#principes" onclick="closeMenu()">Principes</a></li>
+    <li><a href="#pratiques" onclick="closeMenu()">Pratiques</a></li>
+    <li><a href="#minuteur" onclick="closeMenu()">Meditation</a></li>
+    <li><a href="#journal" onclick="closeMenu()">Journal</a></li>
+    <li><a href="#progression" onclick="closeMenu()">Progression</a></li>
+    <li><a href="#ressources" onclick="closeMenu()">Ressources</a></li>
   </ul>
-  <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">
+  <button id="navToggle" class="nav-toggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
+<!-- MOBILE MENU -->
 <div id="mobileMenu">
-  <a href="#philosophie"  onclick="closeMenu()">Philosophie</a>
-  <a href="#citation"     onclick="closeMenu()">Citations</a>
-  <a href="#principes"    onclick="closeMenu()">Principes</a>
-  <a href="#pratiques"    onclick="closeMenu()">Pratiques</a>
-  <a href="#minuteur"     onclick="closeMenu()">MÃ©ditation</a>
-  <a href="#journal"      onclick="closeMenu()">Journal</a>
-  <a href="#progression"  onclick="closeMenu()">Progression</a>
-  <a href="#ressources"   onclick="closeMenu()">Ressources</a>
+  <a href="#philosophie" onclick="closeMenu()">Philosophie</a>
+  <a href="#citation" onclick="closeMenu()">Citations</a>
+  <a href="#principes" onclick="closeMenu()">Principes</a>
+  <a href="#pratiques" onclick="closeMenu()">Pratiques</a>
+  <a href="#minuteur" onclick="closeMenu()">Meditation</a>
+  <a href="#journal" onclick="closeMenu()">Journal</a>
+  <a href="#progression" onclick="closeMenu()">Progression</a>
+  <a href="#ressources" onclick="closeMenu()">Ressources</a>
 </div>
 
-<!-- ========================
-     HERO
-======================== -->
+<!-- ============================================================
+   HERO
+============================================================ -->
 <section id="hero">
-  <p class="hero-kicker">Le moment dÃ©cisif &nbsp;Â·&nbsp; Ïhe right moment</p>
-  <h1 class="hero-title">KAIROS</h1>
-  <p class="hero-subtitle">La maÃ®trise de soi comme art de vivre</p>
-  <blockquote class="hero-quote">
-    <span id="heroText"></span>
-    <cite id="heroCite"></cite>
-  </blockquote>
-  <div class="hero-scroll">
-    <span>DÃ©couvrir</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- ========================
-     PHILOSOPHIE
-======================== -->
-<section id="philosophie">
-  <div class="container">
-    <div class="philosophie-grid">
-      <div class="philosophie-text reveal">
-        <p class="section-label">Notre fondation</p>
-        <h2 class="section-title">L'art du sang-froid</h2>
-        <div class="section-divider"></div>
-        <p>KAIROS est un sanctuaire philosophique fondÃ© sur la sagesse stoÃ¯cienne. Un espace numÃ©rique pour ceux qui cherchent Ã  cultiver la maÃ®trise de soi dans un monde saturÃ© de bruit et d'agitation.</p>
-        <p>Le stoÃ¯cisme n'est pas une doctrine d'indiffÃ©rence â c'est une discipline de luciditÃ©. Discerner ce qui est en notre pouvoir, et agir avec excellence sur ce terrain uniquement.</p>
-        <p>Ici, chaque jour est une invitation Ã  la pratique consciente. Non pas la perfection comme destination, mais la rigueur comme chemin.</p>
-      </div>
-      <div class="reveal">
-        <blockquote class="philosophie-blockquote">
-          "Ne cherche pas Ã  ce que les Ã©vÃ©nements arrivent comme tu le veux, mais dÃ©sire que les Ã©vÃ©nements arrivent comme ils arrivent, et tu seras en paix."
-          <cite>â ÃpictÃ¨te, Manuel</cite>
+  <p></p>
+</section>e-blockquote">
+          "Ne cherche pas à ce que les événements arrivent comme tu le veux, mais désire que les événements arrivent comme ils arrivent, et tu seras en paix."
+          <cite>— Épictète, Manuel</cite>
         </blockquote>
       </div>
     </div>
@@ -569,19 +567,19 @@
 <section id="citation">
   <div class="container">
     <div class="centered reveal" style="margin-bottom:3rem;">
-      <p class="section-label">MÃ©ditation quotidienne</p>
+      <p class="section-label">Méditation quotidienne</p>
       <h2 class="section-title">Citation du jour</h2>
       <div class="section-divider"></div>
     </div>
     <div class="quote-card reveal">
-      <p class="quote-text" id="quoteText">â¦</p>
+      <p class="quote-text" id="quoteText">…</p>
       <p class="quote-author" id="quoteAuthor"></p>
       <p class="quote-source"  id="quoteSource"></p>
       <div class="quote-actions">
         <div class="quote-nav">
-          <button class="btn-outline" onclick="prevQuote()">â PrÃ©c.</button>
-          <button class="btn-outline" onclick="shuffleQuote()">AlÃ©atoire</button>
-          <button class="btn-outline" onclick="nextQuote()">Suiv. â</button>
+          <button class="btn-outline" onclick="prevQuote()">← Préc.</button>
+          <button class="btn-outline" onclick="shuffleQuote()">Aléatoire</button>
+          <button class="btn-outline" onclick="nextQuote()">Suiv. →</button>
         </div>
         <div style="display:flex;gap:.75rem;align-items:center;">
           <span class="quote-counter" id="quoteCounter"></span>
@@ -598,7 +596,7 @@
 <section id="principes">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">Les piliers stoÃ¯ciens</p>
+      <p class="section-label">Les piliers stoïciens</p>
       <h2 class="section-title">Six principes fondamentaux</h2>
       <div class="section-divider"></div>
     </div>
@@ -618,34 +616,34 @@
     </div>
     <div class="pratiques-grid reveal">
       <div class="pratique-item">
-        <div class="pratique-icon">ð</div>
-        <h3 class="pratique-title">MÃ©ditation matinale</h3>
-        <p class="pratique-desc">Avant toute chose, cinq minutes de silence. Posez cette question&nbsp;: "Que puis-je contrÃ´ler aujourd'hui&nbsp;?" Identifiez vos intentions, non vos attentes.</p>
+        <div class="pratique-icon">🌅</div>
+        <h3 class="pratique-title">Méditation matinale</h3>
+        <p class="pratique-desc">Avant toute chose, cinq minutes de silence. Posez cette question&nbsp;: "Que puis-je contrôler aujourd'hui&nbsp;?" Identifiez vos intentions, non vos attentes.</p>
       </div>
       <div class="pratique-item">
-        <div class="pratique-icon">âï¸</div>
-        <h3 class="pratique-title">Journal stoÃ¯cien</h3>
-        <p class="pratique-desc">Chaque soir, trois lignes. Ce que vous avez bien fait. Ce que vous pouviez mieux faire. Ce qui Ã©tait hors de votre contrÃ´le. Marc AurÃ¨le pratiquait ceci chaque nuit.</p>
+        <div class="pratique-icon">✍️</div>
+        <h3 class="pratique-title">Journal stoïcien</h3>
+        <p class="pratique-desc">Chaque soir, trois lignes. Ce que vous avez bien fait. Ce que vous pouviez mieux faire. Ce qui était hors de votre contrôle. Marc Aurèle pratiquait ceci chaque nuit.</p>
       </div>
       <div class="pratique-item">
-        <div class="pratique-icon">â¡</div>
-        <h3 class="pratique-title">PrÃ©mÃ©ditation du mal</h3>
-        <p class="pratique-desc">Visualisez ce qui pourrait mal tourner aujourd'hui. Non pour s'inquiÃ©ter, mais pour s'y prÃ©parer avec calme. La surprise est l'ennemi du sang-froid.</p>
+        <div class="pratique-icon">⚡</div>
+        <h3 class="pratique-title">Préméditation du mal</h3>
+        <p class="pratique-desc">Visualisez ce qui pourrait mal tourner aujourd'hui. Non pour s'inquiéter, mais pour s'y préparer avec calme. La surprise est l'ennemi du sang-froid.</p>
       </div>
       <div class="pratique-item">
-        <div class="pratique-icon">âï¸</div>
+        <div class="pratique-icon">❄️</div>
         <h3 class="pratique-title">Inconfort volontaire</h3>
-        <p class="pratique-desc">Une douche froide. Un repas simple. Un jour sans divertissement. Pratiquez l'ascÃ¨se rÃ©guliÃ¨re pour ne jamais devenir l'esclave de votre propre confort.</p>
+        <p class="pratique-desc">Une douche froide. Un repas simple. Un jour sans divertissement. Pratiquez l'ascèse régulière pour ne jamais devenir l'esclave de votre propre confort.</p>
       </div>
       <div class="pratique-item">
-        <div class="pratique-icon">â¸ï¸</div>
-        <h3 class="pratique-title">La pause stoÃ¯cienne</h3>
-        <p class="pratique-desc">Avant de rÃ©agir, comptez jusqu'Ã  dix. Observez l'impulsion. DÃ©cidez ensuite si elle mÃ©rite d'Ãªtre suivie. La rÃ©ponse n'est jamais une obligation.</p>
+        <div class="pratique-icon">⏸️</div>
+        <h3 class="pratique-title">La pause stoïcienne</h3>
+        <p class="pratique-desc">Avant de réagir, comptez jusqu'à dix. Observez l'impulsion. Décidez ensuite si elle mérite d'être suivie. La réponse n'est jamais une obligation.</p>
       </div>
       <div class="pratique-item">
-        <div class="pratique-icon">ð</div>
+        <div class="pratique-icon">💀</div>
         <h3 class="pratique-title">Memento Mori</h3>
-        <p class="pratique-desc">Rappelez-vous que vous Ãªtes mortel. Non avec fatalisme, mais avec urgence bienveillante. Ce rappel transforme les trivia en luxes et les moments en prioritÃ©s.</p>
+        <p class="pratique-desc">Rappelez-vous que vous êtes mortel. Non avec fatalisme, mais avec urgence bienveillante. Ce rappel transforme les trivia en luxes et les moments en priorités.</p>
       </div>
     </div>
   </div>
@@ -658,7 +656,7 @@
   <div class="container">
     <div class="centered reveal" style="margin-bottom:3rem;">
       <p class="section-label">Outil de pratique</p>
-      <h2 class="section-title">Minuteur de mÃ©ditation</h2>
+      <h2 class="section-title">Minuteur de méditation</h2>
       <div class="section-divider"></div>
     </div>
     <div class="timer-wrap reveal">
@@ -677,7 +675,7 @@
       </div>
       <div class="timer-controls">
         <button class="btn-primary"   id="timerStartBtn" onclick="toggleTimer()">Commencer</button>
-        <button class="btn-secondary"                    onclick="resetTimer()">RÃ©initialiser</button>
+        <button class="btn-secondary"                    onclick="resetTimer()">Réinitialiser</button>
       </div>
     </div>
   </div>
@@ -690,23 +688,23 @@
   <div class="container">
     <div class="reveal">
       <p class="section-label">Espace personnel</p>
-      <h2 class="section-title">Journal stoÃ¯cien</h2>
+      <h2 class="section-title">Journal stoïcien</h2>
       <div class="section-divider"></div>
       <p style="color:var(--text-secondary);margin-bottom:2rem;font-size:.875rem;">
-        Vos entrÃ©es sont sauvegardÃ©es localement sur cet appareil. Personne d'autre ne peut les lire.
+        Vos entrées sont sauvegardées localement sur cet appareil. Personne d'autre ne peut les lire.
       </p>
     </div>
     <div class="journal-wrap">
       <div class="journal-form reveal">
         <p class="journal-dateline" id="journalDate"></p>
         <textarea class="journal-textarea" id="journalInput"
-          placeholder="Qu'avez-vous appris sur vous-mÃªme aujourd'hui ?" rows="5"></textarea>
+          placeholder="Qu'avez-vous appris sur vous-même aujourd'hui ?" rows="5"></textarea>
         <div class="journal-prompts">
-          <span class="prompt-chip" onclick="addPrompt('Ce que j\'ai bien fait : ')">â Bien fait</span>
-          <span class="prompt-chip" onclick="addPrompt('Ce que j\'aurais pu mieux faire : ')">â³ AmÃ©liorer</span>
-          <span class="prompt-chip" onclick="addPrompt('Hors de mon contrÃ´le : ')">â LÃ¢cher prise</span>
-          <span class="prompt-chip" onclick="addPrompt('Je suis reconnaissant pour : ')">â¥ Gratitude</span>
-          <span class="prompt-chip" onclick="addPrompt('L\'obstacle du jour Ã©tait : ')">â¬¥ Obstacle</span>
+          <span class="prompt-chip" onclick="addPrompt('Ce que j\'ai bien fait : ')">✓ Bien fait</span>
+          <span class="prompt-chip" onclick="addPrompt('Ce que j\'aurais pu mieux faire : ')">⟳ Améliorer</span>
+          <span class="prompt-chip" onclick="addPrompt('Hors de mon contrôle : ')">○ Lâcher prise</span>
+          <span class="prompt-chip" onclick="addPrompt('Je suis reconnaissant pour : ')">♥ Gratitude</span>
+          <span class="prompt-chip" onclick="addPrompt('L\'obstacle du jour était : ')">⬥ Obstacle</span>
         </div>
         <div class="journal-bottom">
           <span class="journal-stats" id="journalStats"></span>
@@ -731,15 +729,15 @@
     <div class="streak-wrap reveal">
       <div class="streak-card">
         <div class="streak-num" id="streakCount">0</div>
-        <div class="streak-label">Jours consÃ©cutifs</div>
+        <div class="streak-label">Jours consécutifs</div>
       </div>
       <div class="streak-card">
         <div class="streak-num" id="totalEntries">0</div>
-        <div class="streak-label">EntrÃ©es au journal</div>
+        <div class="streak-label">Entrées au journal</div>
       </div>
       <div class="streak-card">
         <div class="streak-num" id="totalSessions">0</div>
-        <div class="streak-label">Sessions de mÃ©ditation</div>
+        <div class="streak-label">Sessions de méditation</div>
       </div>
     </div>
     <p style="text-align:center;color:var(--text-secondary);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;opacity:.7;">
@@ -755,40 +753,40 @@
 <section id="ressources">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">BibliothÃ¨que</p>
+      <p class="section-label">Bibliothèque</p>
       <h2 class="section-title">Ressources essentielles</h2>
       <div class="section-divider"></div>
     </div>
     <div class="ressources-grid">
       <a href="https://www.gutenberg.org/ebooks/author/1660" target="_blank" rel="noopener" class="ressource-card reveal">
-        <p class="ressource-type">ð Livre â Gratuit</p>
-        <h3 class="ressource-title">MÃ©ditations</h3>
-        <p class="ressource-author">Marc AurÃ¨le Â· PensÃ©es personnelles de l'empereur philosophe</p>
+        <p class="ressource-type">📖 Livre — Gratuit</p>
+        <h3 class="ressource-title">Méditations</h3>
+        <p class="ressource-author">Marc Aurèle · Pensées personnelles de l'empereur philosophe</p>
       </a>
       <a href="https://www.gutenberg.org/ebooks/45699" target="_blank" rel="noopener" class="ressource-card reveal">
-        <p class="ressource-type">ð Livre â Gratuit</p>
+        <p class="ressource-type">📖 Livre — Gratuit</p>
         <h3 class="ressource-title">Manuel (Enchiridion)</h3>
-        <p class="ressource-author">ÃpictÃ¨te Â· Guide pratique de la libertÃ© intÃ©rieure</p>
+        <p class="ressource-author">Épictète · Guide pratique de la liberté intérieure</p>
       </a>
       <a href="https://www.gutenberg.org/ebooks/author/1062" target="_blank" rel="noopener" class="ressource-card reveal">
-        <p class="ressource-type">ð Livre â Gratuit</p>
-        <h3 class="ressource-title">Lettres Ã  Lucilius</h3>
-        <p class="ressource-author">SÃ©nÃ¨que Â· 124 lettres sur l'art de vivre</p>
+        <p class="ressource-type">📖 Livre — Gratuit</p>
+        <h3 class="ressource-title">Lettres à Lucilius</h3>
+        <p class="ressource-author">Sénèque · 124 lettres sur l'art de vivre</p>
       </a>
       <a href="https://www.gutenberg.org/ebooks/author/1062" target="_blank" rel="noopener" class="ressource-card reveal">
-        <p class="ressource-type">ð TraitÃ© â Gratuit</p>
-        <h3 class="ressource-title">De la briÃ¨vetÃ© de la vie</h3>
-        <p class="ressource-author">SÃ©nÃ¨que Â· Sur le temps et ce qu'on en fait</p>
+        <p class="ressource-type">📚 Traité — Gratuit</p>
+        <h3 class="ressource-title">De la brièveté de la vie</h3>
+        <p class="ressource-author">Sénèque · Sur le temps et ce qu'on en fait</p>
       </a>
       <a href="#journal" class="ressource-card reveal">
-        <p class="ressource-type">âï¸ Outil â Sur KAIROS</p>
-        <h3 class="ressource-title">Journal stoÃ¯cien quotidien</h3>
-        <p class="ressource-author">RÃ©flexions et prises de conscience personnelles</p>
+        <p class="ressource-type">✍️ Outil — Sur KAIROS</p>
+        <h3 class="ressource-title">Journal stoïcien quotidien</h3>
+        <p class="ressource-author">Réflexions et prises de conscience personnelles</p>
       </a>
       <a href="#minuteur" class="ressource-card reveal">
-        <p class="ressource-type">ð§ Outil â Sur KAIROS</p>
-        <h3 class="ressource-title">Minuteur de mÃ©ditation</h3>
-        <p class="ressource-author">1 Ã  20 minutes Â· Son de cloche Â· Hors-ligne</p>
+        <p class="ressource-type">🧘 Outil — Sur KAIROS</p>
+        <h3 class="ressource-title">Minuteur de méditation</h3>
+        <p class="ressource-author">1 à 20 minutes · Son de cloche · Hors-ligne</p>
       </a>
     </div>
   </div>
@@ -799,7 +797,7 @@
 ======================== -->
 <footer>
   <p class="footer-logo">KAIROS</p>
-  <p class="footer-quote">"La vie est longue si l'on sait s'en servir." â SÃ©nÃ¨que</p>
+  <p class="footer-quote">"La vie est longue si l'on sait s'en servir." — Sénèque</p>
   <ul class="footer-links">
     <li><a href="#hero">Accueil</a></li>
     <li><a href="#citation">Citations</a></li>
@@ -807,7 +805,7 @@
     <li><a href="#progression">Progression</a></li>
     <li><a href="https://github.com/Macdubh28/kairos" target="_blank" rel="noopener">GitHub</a></li>
   </ul>
-  <p class="footer-copy">Â© 2026 KAIROS â Tous droits rÃ©servÃ©s</p>
+  <p class="footer-copy">© 2026 KAIROS — Tous droits réservés</p>
 </footer>
 
 
@@ -816,45 +814,45 @@
 ======================== -->
 <script>
 /* ============================================================
-   DATA â CITATIONS
+   DATA — CITATIONS
 ============================================================ */
 const QUOTES = [
-  { t:"Vous avez du pouvoir sur votre esprit, pas sur les Ã©vÃ©nements extÃ©rieurs. RÃ©alisez cela, et vous trouverez la force.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"Il ne faut pas s'exercer Ã  fuir la douleur, mais Ã  la supporter.", a:"ÃpictÃ¨te", s:"Entretiens" },
-  { t:"Ce n'est pas les Ã©vÃ©nements qui troublent les hommes, mais les jugements qu'ils portent sur les Ã©vÃ©nements.", a:"ÃpictÃ¨te", s:"Manuel" },
-  { t:"La fortune est d'une nature changeante, mais la sagesse est Ã©ternelle.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
-  { t:"Tout ce qui n'est pas avantageux Ã  la ruche n'est pas avantageux Ã  l'abeille.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"Ne gaspille pas le reste de ta vie Ã  des pensÃ©es sur les autres.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"On souffre plus dans l'imagination que dans la rÃ©alitÃ©.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
-  { t:"L'obstacle sur le chemin devient le chemin.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"Sois maÃ®tre de toi-mÃªme avant de vouloir diriger les autres.", a:"ÃpictÃ¨te", s:"Entretiens" },
-  { t:"Si ce n'est pas juste, ne le fais pas. Si ce n'est pas vrai, ne le dis pas.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"La vie est courte, mais l'art est long.", a:"SÃ©nÃ¨que", s:"De Brevitate Vitae" },
-  { t:"Persiste et rÃ©siste.", a:"ÃpictÃ¨te", s:"Entretiens" },
-  { t:"Le sage porte en lui le monde entier.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
-  { t:"Accepte les choses auxquelles le destin te lie, et aime les gens avec qui le destin t'unit.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"La libertÃ© n'est pas quelque chose que vous recevez d'un autre. Elle se conquiert.", a:"ÃpictÃ¨te", s:"Entretiens" },
-  { t:"Nusquam est qui ubique est â Celui qui est partout n'est nulle part.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
-  { t:"Commence par faire ce qui est nÃ©cessaire, puis ce qui est possible, et soudain tu feras l'impossible.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"Ce que nous appelons destin n'est que la rÃ©sultante de nos choix passÃ©s.", a:"SÃ©nÃ¨que", s:"De Providentia" },
-  { t:"Traite les hommes comme tu veux Ãªtre traitÃ©. Vis ainsi et tu vivras en accord avec la nature.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"La difficultÃ© de la vertu est ce qui la rend prÃ©cieuse.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
-  { t:"Deux choses rendent l'Ã¢me trÃ¨s forte : la foi en la vÃ©ritÃ© et la confiance en soi-mÃªme.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"Aucun vent ne souffle en faveur de celui qui n'a pas de port de destination.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
-  { t:"Demande-toi Ã  chaque instant : est-ce que je suis capable de faire une chose bonne ici ?", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
-  { t:"Ce qui est frappant dans la mort, c'est qu'elle met en Ã©vidence ce qui Ã©tait vraiment prÃ©cieux dans la vie.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
+  { t:"Vous avez du pouvoir sur votre esprit, pas sur les événements extérieurs. Réalisez cela, et vous trouverez la force.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"Il ne faut pas s'exercer à fuir la douleur, mais à la supporter.", a:"Épictète", s:"Entretiens" },
+  { t:"Ce n'est pas les événements qui troublent les hommes, mais les jugements qu'ils portent sur les événements.", a:"Épictète", s:"Manuel" },
+  { t:"La fortune est d'une nature changeante, mais la sagesse est éternelle.", a:"Sénèque", s:"Lettres à Lucilius" },
+  { t:"Tout ce qui n'est pas avantageux à la ruche n'est pas avantageux à l'abeille.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"Ne gaspille pas le reste de ta vie à des pensées sur les autres.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"On souffre plus dans l'imagination que dans la réalité.", a:"Sénèque", s:"Lettres à Lucilius" },
+  { t:"L'obstacle sur le chemin devient le chemin.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"Sois maître de toi-même avant de vouloir diriger les autres.", a:"Épictète", s:"Entretiens" },
+  { t:"Si ce n'est pas juste, ne le fais pas. Si ce n'est pas vrai, ne le dis pas.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"La vie est courte, mais l'art est long.", a:"Sénèque", s:"De Brevitate Vitae" },
+  { t:"Persiste et résiste.", a:"Épictète", s:"Entretiens" },
+  { t:"Le sage porte en lui le monde entier.", a:"Sénèque", s:"Lettres à Lucilius" },
+  { t:"Accepte les choses auxquelles le destin te lie, et aime les gens avec qui le destin t'unit.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"La liberté n'est pas quelque chose que vous recevez d'un autre. Elle se conquiert.", a:"Épictète", s:"Entretiens" },
+  { t:"Nusquam est qui ubique est — Celui qui est partout n'est nulle part.", a:"Sénèque", s:"Lettres à Lucilius" },
+  { t:"Commence par faire ce qui est nécessaire, puis ce qui est possible, et soudain tu feras l'impossible.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"Ce que nous appelons destin n'est que la résultante de nos choix passés.", a:"Sénèque", s:"De Providentia" },
+  { t:"Traite les hommes comme tu veux être traité. Vis ainsi et tu vivras en accord avec la nature.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"La difficulté de la vertu est ce qui la rend précieuse.", a:"Sénèque", s:"Lettres à Lucilius" },
+  { t:"Deux choses rendent l'âme très forte : la foi en la vérité et la confiance en soi-même.", a:"Marc Aurèle", s:"Méditations" },
+  { t:"Aucun vent ne souffle en faveur de celui qui n'a pas de port de destination.", a:"Sénèque", s:"Lettres à Lucilius" },
+  { t:"Demande-toi à chaque instant : est-ce que je suis capable de faire une chose bonne ici ?", a:"Marc Aurèle", s:"Méditations" },
+  { t:"Ce qui est frappant dans la mort, c'est qu'elle met en évidence ce qui était vraiment précieux dans la vie.", a:"Sénèque", s:"Lettres à Lucilius" },
 ];
 
 /* ============================================================
-   DATA â PRINCIPES
+   DATA — PRINCIPES
 ============================================================ */
 const PRINCIPLES = [
-  { n:"I",   title:"La dichotomie du contrÃ´le", latin:"Hegemonia", desc:"Distinguer ce qui dÃ©pend de nous â jugements, dÃ©sirs, actions â de ce qui n'en dÃ©pend pas. Cette distinction est le fondement de toute libertÃ© intÃ©rieure." },
-  { n:"II",  title:"Amor Fati",                 latin:"Amor Fati",      desc:"Aimer son destin. Non pas le subir, ni mÃªme l'accepter passivement, mais l'embrasser pleinement, y compris ses Ã©preuves et ses obstacles." },
-  { n:"III", title:"Memento Mori",               latin:"Memento Mori",   desc:"Se souvenir que l'on est mortel. Ce rappel n'est pas morbide â il est libÃ©rateur. Il donne Ã  chaque moment son poids rÃ©el et Ã  chaque action son urgence vÃ©ritable." },
-  { n:"IV",  title:"Le moment prÃ©sent",          latin:"Nunc ipsum",     desc:"Vivre pleinement dans l'instant. Le passÃ© est rÃ©volu, le futur incertain. Seul le prÃ©sent est rÃ©el, et seul il mÃ©rite notre attention complÃ¨te." },
-  { n:"V",   title:"La vertu comme bien suprÃªme",latin:"Virtus sola bonum", desc:"La richesse et la gloire sont des prÃ©fÃ©rÃ©s â ni bons ni mauvais en soi. Seule la vertu â sagesse, justice, courage, tempÃ©rance â constitue le vrai bien." },
-  { n:"VI",  title:"L'obstacle est le chemin",   latin:"Per aspera",     desc:"Chaque obstacle devient l'occasion de dÃ©velopper une vertu. La rÃ©sistance forge le caractÃ¨re. On ne grandit pas malgrÃ© les difficultÃ©s, mais grÃ¢ce Ã  elles." },
+  { n:"I",   title:"La dichotomie du contrôle", latin:"Hegemonia", desc:"Distinguer ce qui dépend de nous — jugements, désirs, actions — de ce qui n'en dépend pas. Cette distinction est le fondement de toute liberté intérieure." },
+  { n:"II",  title:"Amor Fati",                 latin:"Amor Fati",      desc:"Aimer son destin. Non pas le subir, ni même l'accepter passivement, mais l'embrasser pleinement, y compris ses épreuves et ses obstacles." },
+  { n:"III", title:"Memento Mori",               latin:"Memento Mori",   desc:"Se souvenir que l'on est mortel. Ce rappel n'est pas morbide — il est libérateur. Il donne à chaque moment son poids réel et à chaque action son urgence véritable." },
+  { n:"IV",  title:"Le moment présent",          latin:"Nunc ipsum",     desc:"Vivre pleinement dans l'instant. Le passé est révolu, le futur incertain. Seul le présent est réel, et seul il mérite notre attention complète." },
+  { n:"V",   title:"La vertu comme bien suprême",latin:"Virtus sola bonum", desc:"La richesse et la gloire sont des préférés — ni bons ni mauvais en soi. Seule la vertu — sagesse, justice, courage, tempérance — constitue le vrai bien." },
+  { n:"VI",  title:"L'obstacle est le chemin",   latin:"Per aspera",     desc:"Chaque obstacle devient l'occasion de développer une vertu. La résistance forge le caractère. On ne grandit pas malgré les difficultés, mais grâce à elles." },
 ];
 
 /* ============================================================
@@ -885,10 +883,10 @@ function shuffleQuote() { qIdx = Math.floor(Math.random()*QUOTES.length); showQu
 
 function copyQuote() {
   const q = QUOTES[qIdx];
-  const text = '"' + q.t + '" â ' + q.a + ', ' + q.s;
+  const text = '"' + q.t + '" — ' + q.a + ', ' + q.s;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copyBtn');
-    btn.textContent = 'CopiÃ© â';
+    btn.textContent = 'Copié ✓';
     setTimeout(() => btn.textContent = 'Copier', 2000);
   });
 }
@@ -910,7 +908,7 @@ function renderPrinciples() {
 /* ============================================================
    TIMER LOGIC
 ============================================================ */
-const CIRC = 2 * Math.PI * 120; // â 753.98
+const CIRC = 2 * Math.PI * 120; // ≈ 753.98
 let tDur = 60, tRem = 60, tInterval = null, tRunning = false;
 
 function setTimer(sec, btn) {
@@ -942,7 +940,7 @@ function toggleTimer() {
       setProgress(tRem / tDur);
       if (tRem <= 0) {
         clearInterval(tInterval); tRunning = false;
-        document.getElementById('timerStartBtn').textContent = 'TerminÃ©';
+        document.getElementById('timerStartBtn').textContent = 'Terminé';
         playBell();
         bumpStat('kairos_sessions');
         updateStats();
@@ -1002,17 +1000,17 @@ function renderJournal() {
   const entries = getEntries();
   const el = document.getElementById('journalEntries');
   if (!entries.length) {
-    el.innerHTML = '<p class="journal-empty">Votre journal est vide. Commencez Ã  Ã©crireâ¦</p>';
+    el.innerHTML = '<p class="journal-empty">Votre journal est vide. Commencez à écrire…</p>';
     return;
   }
   el.innerHTML = entries.map(e => `
     <div class="journal-entry">
       <p class="journal-entry-date">${e.date}</p>
       <p class="journal-entry-text">${e.text.replace(/\n/g,'<br>')}</p>
-      <button class="journal-del" onclick="deleteEntry(${e.id})">â</button>
+      <button class="journal-del" onclick="deleteEntry(${e.id})">✕</button>
     </div>
   `).join('');
-  document.getElementById('journalStats').textContent = entries.length + ' entrÃ©e' + (entries.length>1?'s':'');
+  document.getElementById('journalStats').textContent = entries.length + ' entrée' + (entries.length>1?'s':'');
 }
 
 function addPrompt(txt) {
@@ -1107,7 +1105,7 @@ function setupReveal() {
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 }
 
-/* =========================================================
+/* ============================================================
    INIT
 ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
@@ -1119,7 +1117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Hero quote (different index)
   const hq = QUOTES[(qIdx + 5) % QUOTES.length];
   document.getElementById('heroText').textContent = hq.t;
-  document.getElementById('heroCite').textContent = 'â ' + hq.a;
+  document.getElementById('heroCite').textContent = '— ' + hq.a;
 
   // Principles
   renderPrinciples();
