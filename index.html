@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KAIROS â Plateforme de maÃ®trise de soi et de philosophie stoÃ¯cienne. Citations, journal, mÃ©ditation, principes.">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="KAIROS">
+  <meta property="og:title" content="KAIROS â MaÃ®trise de Soi">
+  <meta property="og:description" content="La maÃ®trise de soi comme art de vivre">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://macdubh28.github.io/kairos/">
+  <link rel="manifest" href="manifest.json">
+  <title>KAIROS â MaÃ®trise de Soi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ==============================
+       VARIABLES & RESET
+    ============================== */
+    :root {
+      --bg-primary:    #0A0A0A;
+      --bg-secondary:  #141414;
+      --bg-card:       #1A1A1A;
+      --text-primary:  #F5F0E8;
+      --text-secondary:#8A8A8A;
+      --accent:        #C9A84C;
+      --accent-dim:    #7A6030;
+      --border:        #2A2A2A;
+      --font-display:  'Cormorant Garamond', Georgia, serif;
+      --font-body:     'Inter', system-ui, sans-serif;
+      --ease:          0.3s ease;
+      --r:             3px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ==============================
+       NAVIGATION
+    ============================== */
+    #navbar {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3rem;
+      background: linear-gradient(to bottom, rgba(10,10,10,.97), transparent);
+      backdrop-filter: blur(12px);
+      transition: var(--ease);
+    }
+    #navbar.scrolled {
+      background: rgba(10,10,10,.97);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 3rem;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight:600;
+      letter-spacing: .35em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; }
+    .nav-links a {
+      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--text-secondary); transition: color var(--ease);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-toggle {
+      display:none; flex-direction:column; gap:5px;
+      background:none; border:none; cursor:pointer; padding:4px;
+    }
+    .nav-toggle span {
+      display:block; width:22px; height:1px;
+      background:var(--text-primary); transition: var(--ease);
+    }
+
+    /* MOBILE OVERLAY */
+    #mobileMenu {
+      display:none; position:fixed; inset:0; z-index:999;
+      background: rgba(10,10,10,.98);
+      flex-direction:column; justify-content:center; align-items:center; gap:2.5rem;
+    }
+    #mobileMenu.open { display:flex; }
+    #mobileMenu a {
+      font-family: var(--font-display); font-size: 2.2rem;
+      color: var(--text-primary); transition: color var(--ease);
+    }
+    #mobileMenu a:hover { color: var(--accent); }
+
+    /* ==============================
+       HERO
+    ============================== */
+    #hero {
+      min-height: 100vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+      padding: 7rem 2rem 5rem; position:relative; overflow:hidden;
+    }
+    #hero::before {
+      content:''; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 50% 35%, rgba(201,168,76,.07) 0%, transparent 65%),
+        radial-gradient(ellipse at 20% 80%, rgba(201,168,76,.03) 0%, transparent 45%);
+    }
+    .hero-kicker {
+      font-size:.65rem; letter-spacing:.45em; text-transform:uppercase;
+      color: var(--accent); margin-bottom:2rem;
+      opacity:0; animation: fadeUp 1s ease .3s forwards;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 17vw, 13rem);
+      font-weight:300; letter-spacing:.18em; line-height:1;
+      color: var(--text-primary); margin-bottom:1.5rem;
+      opacity:0; animation: fadeUp 1s ease .5s forwards;
+    }
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(.95rem, 2.2vw, 1.3rem);
+      font-style:italic; color:var(--text-secondary);
+      max-width:550px; margin-bottom:3rem;
+      opacity:0; animation: fadeUp 1s ease .7s forwards;
+    }
+    .hero-quote {
+      font-family: var(--font-display);
+      font-size: clamp(.9rem, 1.8vw, 1.05rem);
+      font-style:italic; color:var(--text-secondary);
+      max-width:480px; text-align:left;
+      border-left:1px solid var(--accent); padding-left:1.5rem;
+      opacity:0; animation: fadeUp 1s ease .9s forwards;
+    }
+    .hero-quote cite {
+      display:block; margin-top:.5rem;
+      font-size:.7rem; letter-spacing:.15em; color:var(--accent);
+      font-style:normal; text-transform:uppercase;
+    }
+    .hero-scroll {
+      position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:.5rem;
+      opacity:0; animation: fadeUp 1s ease 1.2s forwards;
+    }
+    .hero-scroll span { font-size:.6rem; letter-spacing:.35em; text-transform:uppercase; color:var(--text-secondary); }
+    .scroll-line {
+      width:1px; height:40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* ==============================
+       GENERIC SECTION LAYOUT
+    ============================== */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size:.62rem; letter-spacing:.4em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:.75rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight:300; line-height:1.2; margin-bottom:1rem;
+    }
+    .section-divider { width:38px; height:1px; background:var(--accent); margin-bottom:3rem; }
+    .centered { text-align:center; }
+    .centered .section-divider { margin-left:auto; margin-right:auto; }
+
+    /* REVEAL ANIMATIONS */
+    .reveal {
+      opacity:0; transform:translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ==============================
+       SECTION: PHILOSOPHIE
+    ============================== */
+    #philosophie { background: var(--bg-secondary); }
+    .philosophie-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+    }
+    .philosophie-text p { color:var(--text-secondary); margin-bottom:1.4rem; font-size:.93rem; }
+    .philosophie-blockquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+      font-style:italic; color:var(--text-primary);
+      border-left:2px solid var(--accent); padding-left:2rem; line-height:1.55;
+    }
+    .philosophie-blockquote cite {
+      display:block; margin-top:1rem; font-size:.7rem; letter-spacing:.12em;
+      color:var(--accent); font-style:normal; text-transform:uppercase;
+    }
+
+    /* ==============================
+       SECTION: CITATION DU JOUR
+    ============================== */
+    #citation { background: var(--bg-primary); }
+    .quote-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--r); padding:4rem 3rem;
+      max-width:820px; margin:0 auto; position:relative; overflow:hidden;
+    }
+    .quote-card::before {
+      content:'"';
+      font-family:var(--font-display); font-size:9rem;
+      color:var(--accent); opacity:.1;
+      position:absolute; top:-2rem; left:1.5rem; line-height:1;
+    }
+    .quote-text {
+      font-family:var(--font-display);
+      font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+      font-style:italic; line-height:1.65; margin-bottom:2rem; position:relative; z-index:1;
+      transition: opacity .4s ease;
+    }
+    .quote-author { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); }
+    .quote-source { font-size:.68rem; color:var(--text-secondary); margin-top:.25rem; }
+    .quote-actions {
+      display:flex; justify-content:space-between; align-items:center; margin-top:2.5rem; flex-wrap:wrap; gap:1rem;
+    }
+    .quote-nav { display:flex; gap:1rem; }
+    .btn-outline {
+      background:none; border:1px solid var(--border); color:var(--text-secondary);
+      padding:.55rem 1.4rem; font-size:.7rem; letter-spacing:.15em; text-transform:uppercase;
+      cursor:pointer; transition: var(--ease); font-family:var(--font-body);
+    }
+    .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+    .btn-copy {
+      background:none; border:1px solid var(--border); color:var(--text-secondary);
+      padding:.55rem 1.2rem; font-size:.7rem; letter-spacing:.15em; text-transform:uppercase;
+      cursor:pointer; transition: var(--ease); font-family:var(--font-body);
+    }
+    .btn-copy:hover { border-color:var(--accent); color:var(--accent); }
+    .quote-counter { font-size:.65rem; color:var(--text-secondary); letter-spacing:.1em; }
+
+    /* ==============================
+       SECTION: PRINCIPES
+    ============================== */
+    #principes { background: var(--bg-secondary); }
+    .principes-grid {
+      display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:1.5rem;
+    }
+    .principe-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--r); padding:2.5rem; position:relative;
+      transition: transform var(--ease), border-color var(--ease); overflow:hidden;
+    }
+    .principe-card::after {
+      content:''; position:absolute; top:0; left:0; width:2px; height:0;
+      background:var(--accent); transition: height .4s ease;
+    }
+    .principe-card:hover { transform:translateY(-4px); border-color:var(--accent-dim); }
+    .principe-card:hover::after { height:100%; }
+    .principe-num {
+      font-family:var(--font-display); font-size:3.5rem; font-weight:300;
+      color:var(--accent); opacity:.2; line-height:1; margin-bottom:.75rem;
+    }
+    .principe-title {
+      font-family:var(--font-display); font-size:1.25rem;
+      font-weight:400; color:var(--text-primary); margin-bottom:.4rem;
+    }
+    .principe-latin {
+      font-size:.65rem; letter-spacing:.15em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:1rem;
+    }
+    .principe-desc { font-size:.87rem; color:var(--text-secondary); line-height:1.75; }
+
+    /* ==============================
+       SECTION: PRATIQUES
+    ============================== */
+    #pratiques { background:var(--bg-primary); }
+    .pratiques-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:1px; background:var(--border); border:1px solid var(--border);
+    }
+    .pratique-item {
+      background:var(--bg-primary); padding:2.5rem;
+      transition: background var(--ease);
+    }
+    .pratique-item:hover { background:var(--bg-card); }
+    .pratique-icon { font-size:1.5rem; margin-bottom:1rem; }
+    .pratique-title {
+      font-family:var(--font-display); font-size:1.2rem;
+      font-weight:400; margin-bottom:.6rem;
+    }
+    .pratique-desc { font-size:.855rem; color:var(--text-secondary); line-height:1.75; }
+
+    /* ==============================
+       SECTION: MINUTEUR
+    ============================== */
+    #minuteur { background:var(--bg-secondary); }
+    .timer-wrap { max-width:460px; margin:0 auto; text-align:center; }
+    .timer-presets { display:flex; justify-content:center; gap:.75rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+    .timer-btn {
+      background:none; border:1px solid var(--border); color:var(--text-secondary);
+      padding:.5rem 1.2rem; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+      cursor:pointer; transition: var(--ease); font-family:var(--font-body);
+    }
+    .timer-btn:hover, .timer-btn.active { border-color:var(--accent); color:var(--accent); }
+    .timer-ring { position:relative; display:inline-flex; align-items:center; justify-content:center; margin-bottom:2rem; }
+    .timer-svg { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-90deg); width:260px; height:260px; }
+    .timer-circle-bg { fill:none; stroke:var(--border); stroke-width:1.5; }
+    .timer-circle-prog {
+      fill:none; stroke:var(--accent); stroke-width:1.5;
+      stroke-linecap:round;
+      stroke-dasharray: 753.98; /* 2Ï Ã 120 */
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+    .timer-display {
+      font-family:var(--font-display);
+      font-size: clamp(3.5rem, 12vw, 6.5rem);
+      font-weight:300; letter-spacing:.05em;
+      padding: 3rem;
+      position:relative; z-index:1;
+    }
+    .timer-controls { display:flex; justify-content:center; gap:1rem; }
+    .btn-primary {
+      background:var(--accent); color:var(--bg-primary); border:none;
+      padding:.85rem 2.5rem; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+      cursor:pointer; transition:background var(--ease); font-family:var(--font-body); font-weight:500;
+    }
+    .btn-primary:hover { background:var(--text-primary); }
+    .btn-secondary {
+      background:none; border:1px solid var(--border); color:var(--text-secondary);
+      padding:.85rem 2.5rem; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+      cursor:pointer; transition: var(--ease); font-family:var(--font-body);
+    }
+    .btn-secondary:hover { border-color:var(--text-secondary); color:var(--text-primary); }
+
+    /* ==============================
+       SECTION: JOURNAL
+    ============================== */
+    #journal { background:var(--bg-primary); }
+    .journal-wrap { max-width:680px; margin:0 auto; }
+    .journal-form {
+      background:var(--bg-card); border:1px solid var(--border);
+      padding:2rem 2.5rem; margin-bottom:2rem;
+    }
+    .journal-dateline {
+      font-size:.65rem; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:1.25rem;
+    }
+    .journal-textarea {
+      width:100%; background:none; border:none;
+      border-bottom:1px solid var(--border);
+      color:var(--text-primary); font-family:var(--font-display);
+      font-size:1.05rem; font-style:italic;
+      line-height:1.85; padding:.75rem 0; resize:none; min-height:140px; outline:none;
+      transition: border-color var(--ease);
+    }
+    .journal-textarea::placeholder { color:var(--text-secondary); opacity:.45; }
+    .journal-textarea:focus { border-bottom-color:var(--accent); }
+    .journal-prompts { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1.25rem; }
+    .prompt-chip {
+      font-size:.65rem; border:1px solid var(--border); color:var(--text-secondary);
+      padding:.25rem .75rem; cursor:pointer; transition: var(--ease); user-select:none;
+    }
+    .prompt-chip:hover { border-color:var(--accent); color:var(--accent); }
+    .journal-bottom { display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; }
+    .journal-stats { font-size:.65rem; color:var(--text-secondary); letter-spacing:.1em; }
+    .journal-entries { display:flex; flex-direction:column; gap:1px; }
+    .journal-entry {
+      background:var(--bg-card); border:1px solid var(--border);
+      padding:1.5rem 2.5rem; position:relative;
+    }
+    .journal-entry-date {
+      font-size:.62rem; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--text-secondary); margin-bottom:.75rem;
+    }
+    .journal-entry-text {
+      font-family:var(--font-display); font-size:.98rem;
+      font-style:italic; color:var(--text-primary); line-height:1.75;
+    }
+    .journal-del {
+      position:absolute; top:1rem; right:1.25rem; background:none; border:none;
+      color:var(--text-secondary); cursor:pointer; font-size:.75rem;
+      opacity:0; transition: var(--ease);
+    }
+    .journal-entry:hover .journal-del { opacity:1; }
+    .journal-del:hover { color:#e55; }
+    .journal-empty { color:var(--text-secondary); font-size:.87rem; text-align:center; padding:2.5rem; }
+
+    /* ==============================
+       SECTION: PROGRESSION
+    ============================== */
+    #progression { background:var(--bg-secondary); }
+    .streak-wrap { display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; margin-bottom:3rem; }
+    .streak-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      padding:2rem 3rem; text-align:center; min-width:180px;
+    }
+    .streak-num {
+      font-family:var(--font-display); font-size:4rem; font-weight:300;
+      color:var(--accent); line-height:1;
+    }
+    .streak-label { font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:var(--text-secondary); margin-top:.5rem; }
+    .streak-calendar { display:grid; grid-template-columns:repeat(7, 1fr); gap:4px; max-width:320px; margin:0 auto; }
+    .cal-day {
+      aspect-ratio:1; border-radius:2px; background:var(--border);
+      transition: var(--ease);
+    }
+    .cal-day.active { background: var(--accent); opacity:.7; }
+    .cal-day.today { background: var(--accent); opacity:1; }
+
+    /* ==============================
+       SECTION: RESSOURCES
+    ============================== */
+    #ressources { background:var(--bg-primary); }
+    .ressources-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:1.5rem; }
+    .ressource-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      padding:2rem; display:block; transition: var(--ease);
+    }
+    .ressource-card:hover { border-color:var(--accent); transform:translateY(-3px); }
+    .ressource-type { font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:.75rem; }
+    .ressource-title { font-family:var(--font-display); font-size:1.1rem; color:var(--text-primary); margin-bottom:.4rem; }
+    .ressource-author { font-size:.8rem; color:var(--text-secondary); }
+
+    /* ==============================
+       FOOTER
+    ============================== */
+    footer {
+      background:var(--bg-secondary); border-top:1px solid var(--border);
+      padding:5rem 2rem; text-align:center;
+    }
+    .footer-logo {
+      font-family:var(--font-display); font-size:3rem; font-weight:300;
+      letter-spacing:.35em; color:var(--accent); margin-bottom:1.5rem;
+    }
+    .footer-quote {
+      font-family:var(--font-display); font-style:italic;
+      color:var(--text-secondary); margin-bottom:2.5rem;
+    }
+    .footer-links { display:flex; justify-content:center; gap:2.5rem; list-style:none; margin-bottom:2rem; }
+    .footer-links a {
+      font-size:.68rem; letter-spacing:.15em; text-transform:uppercase;
+      color:var(--text-secondary); transition:color var(--ease);
+    }
+    .footer-links a:hover { color:var(--accent); }
+    .footer-copy { font-size:.67rem; color:var(--text-secondary); opacity:.4; }
+
+    /* ==============================
+       KEYFRAMES
+    ============================== */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0);    }
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity:.3; }
+      50%      { opacity:1; }
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+    @media (max-width: 900px) {
+      #navbar { padding:1.25rem 1.5rem; }
+      #navbar.scrolled { padding:.9rem 1.5rem; }
+      .nav-links { display:none; }
+      .nav-toggle { display:flex; }
+    }
+    @media (max-width: 768px) {
+      section { padding:4rem 1.5rem; }
+      .philosophie-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .pratiques-grid { grid-template-columns:1fr; }
+      .principes-grid { grid-template-columns:1fr; }
+      .quote-card { padding:2.5rem 1.5rem; }
+      .timer-svg { width:200px; height:200px; }
+      .timer-circle-bg, .timer-circle-prog { /* r stays 120 */ }
+      .footer-links { gap:1.5rem; flex-wrap:wrap; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { letter-spacing:.08em; }
+      .streak-wrap { gap:1rem; }
+      .streak-card { padding:1.5rem 2rem; min-width:130px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ========================
+     NAVIGATION
+======================== -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Kairos</a>
+  <ul class="nav-links">
+    <li><a href="#philosophie">Philosophie</a></li>
+    <li><a href="#citation">Citations</a></li>
+    <li><a href="#principes">Principes</a></li>
+    <li><a href="#pratiques">Pratiques</a></li>
+    <li><a href="#minuteur">MÃ©ditation</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#progression">Progression</a></li>
+    <li><a href="#ressources">Ressources</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div id="mobileMenu">
+  <a href="#philosophie"  onclick="closeMenu()">Philosophie</a>
+  <a href="#citation"     onclick="closeMenu()">Citations</a>
+  <a href="#principes"    onclick="closeMenu()">Principes</a>
+  <a href="#pratiques"    onclick="closeMenu()">Pratiques</a>
+  <a href="#minuteur"     onclick="closeMenu()">MÃ©ditation</a>
+  <a href="#journal"      onclick="closeMenu()">Journal</a>
+  <a href="#progression"  onclick="closeMenu()">Progression</a>
+  <a href="#ressources"   onclick="closeMenu()">Ressources</a>
+</div>
+
+<!-- ========================
+     HERO
+======================== -->
+<section id="hero">
+  <p class="hero-kicker">Le moment dÃ©cisif &nbsp;Â·&nbsp; Ïhe right moment</p>
+  <h1 class="hero-title">KAIROS</h1>
+  <p class="hero-subtitle">La maÃ®trise de soi comme art de vivre</p>
+  <blockquote class="hero-quote">
+    <span id="heroText"></span>
+    <cite id="heroCite"></cite>
+  </blockquote>
+  <div class="hero-scroll">
+    <span>DÃ©couvrir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ========================
+     PHILOSOPHIE
+======================== -->
+<section id="philosophie">
+  <div class="container">
+    <div class="philosophie-grid">
+      <div class="philosophie-text reveal">
+        <p class="section-label">Notre fondation</p>
+        <h2 class="section-title">L'art du sang-froid</h2>
+        <div class="section-divider"></div>
+        <p>KAIROS est un sanctuaire philosophique fondÃ© sur la sagesse stoÃ¯cienne. Un espace numÃ©rique pour ceux qui cherchent Ã  cultiver la maÃ®trise de soi dans un monde saturÃ© de bruit et d'agitation.</p>
+        <p>Le stoÃ¯cisme n'est pas une doctrine d'indiffÃ©rence â c'est une discipline de luciditÃ©. Discerner ce qui est en notre pouvoir, et agir avec excellence sur ce terrain uniquement.</p>
+        <p>Ici, chaque jour est une invitation Ã  la pratique consciente. Non pas la perfection comme destination, mais la rigueur comme chemin.</p>
+      </div>
+      <div class="reveal">
+        <blockquote class="philosophie-blockquote">
+          "Ne cherche pas Ã  ce que les Ã©vÃ©nements arrivent comme tu le veux, mais dÃ©sire que les Ã©vÃ©nements arrivent comme ils arrivent, et tu seras en paix."
+          <cite>â ÃpictÃ¨te, Manuel</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+     CITATION DU JOUR
+======================== -->
+<section id="citation">
+  <div class="container">
+    <div class="centered reveal" style="margin-bottom:3rem;">
+      <p class="section-label">MÃ©ditation quotidienne</p>
+      <h2 class="section-title">Citation du jour</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="quote-card reveal">
+      <p class="quote-text" id="quoteText">â¦</p>
+      <p class="quote-author" id="quoteAuthor"></p>
+      <p class="quote-source"  id="quoteSource"></p>
+      <div class="quote-actions">
+        <div class="quote-nav">
+          <button class="btn-outline" onclick="prevQuote()">â PrÃ©c.</button>
+          <button class="btn-outline" onclick="shuffleQuote()">AlÃ©atoire</button>
+          <button class="btn-outline" onclick="nextQuote()">Suiv. â</button>
+        </div>
+        <div style="display:flex;gap:.75rem;align-items:center;">
+          <span class="quote-counter" id="quoteCounter"></span>
+          <button class="btn-copy" id="copyBtn" onclick="copyQuote()">Copier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+     PRINCIPES
+======================== -->
+<section id="principes">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Les piliers stoÃ¯ciens</p>
+      <h2 class="section-title">Six principes fondamentaux</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="principes-grid" id="principes-grid"></div>
+  </div>
+</section>
+
+<!-- ========================
+     PRATIQUES
+======================== -->
+<section id="pratiques">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Rituels & discipline</p>
+      <h2 class="section-title">Pratiques quotidiennes</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="pratiques-grid reveal">
+      <div class="pratique-item">
+        <div class="pratique-icon">ð</div>
+        <h3 class="pratique-title">MÃ©ditation matinale</h3>
+        <p class="pratique-desc">Avant toute chose, cinq minutes de silence. Posez cette question&nbsp;: "Que puis-je contrÃ´ler aujourd'hui&nbsp;?" Identifiez vos intentions, non vos attentes.</p>
+      </div>
+      <div class="pratique-item">
+        <div class="pratique-icon">âï¸</div>
+        <h3 class="pratique-title">Journal stoÃ¯cien</h3>
+        <p class="pratique-desc">Chaque soir, trois lignes. Ce que vous avez bien fait. Ce que vous pouviez mieux faire. Ce qui Ã©tait hors de votre contrÃ´le. Marc AurÃ¨le pratiquait ceci chaque nuit.</p>
+      </div>
+      <div class="pratique-item">
+        <div class="pratique-icon">â¡</div>
+        <h3 class="pratique-title">PrÃ©mÃ©ditation du mal</h3>
+        <p class="pratique-desc">Visualisez ce qui pourrait mal tourner aujourd'hui. Non pour s'inquiÃ©ter, mais pour s'y prÃ©parer avec calme. La surprise est l'ennemi du sang-froid.</p>
+      </div>
+      <div class="pratique-item">
+        <div class="pratique-icon">âï¸</div>
+        <h3 class="pratique-title">Inconfort volontaire</h3>
+        <p class="pratique-desc">Une douche froide. Un repas simple. Un jour sans divertissement. Pratiquez l'ascÃ¨se rÃ©guliÃ¨re pour ne jamais devenir l'esclave de votre propre confort.</p>
+      </div>
+      <div class="pratique-item">
+        <div class="pratique-icon">â¸ï¸</div>
+        <h3 class="pratique-title">La pause stoÃ¯cienne</h3>
+        <p class="pratique-desc">Avant de rÃ©agir, comptez jusqu'Ã  dix. Observez l'impulsion. DÃ©cidez ensuite si elle mÃ©rite d'Ãªtre suivie. La rÃ©ponse n'est jamais une obligation.</p>
+      </div>
+      <div class="pratique-item">
+        <div class="pratique-icon">ð</div>
+        <h3 class="pratique-title">Memento Mori</h3>
+        <p class="pratique-desc">Rappelez-vous que vous Ãªtes mortel. Non avec fatalisme, mais avec urgence bienveillante. Ce rappel transforme les trivia en luxes et les moments en prioritÃ©s.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+     MINUTEUR
+======================== -->
+<section id="minuteur">
+  <div class="container">
+    <div class="centered reveal" style="margin-bottom:3rem;">
+      <p class="section-label">Outil de pratique</p>
+      <h2 class="section-title">Minuteur de mÃ©ditation</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="timer-wrap reveal">
+      <div class="timer-presets">
+        <button class="timer-btn active" onclick="setTimer(60,  this)">1 min</button>
+        <button class="timer-btn"        onclick="setTimer(300, this)">5 min</button>
+        <button class="timer-btn"        onclick="setTimer(600, this)">10 min</button>
+        <button class="timer-btn"        onclick="setTimer(1200,this)">20 min</button>
+      </div>
+      <div class="timer-ring">
+        <svg class="timer-svg" viewBox="0 0 260 260">
+          <circle class="timer-circle-bg"   cx="130" cy="130" r="120"/>
+          <circle class="timer-circle-prog" id="timerProg" cx="130" cy="130" r="120"/>
+        </svg>
+        <div class="timer-display" id="timerDisplay">01:00</div>
+      </div>
+      <div class="timer-controls">
+        <button class="btn-primary"   id="timerStartBtn" onclick="toggleTimer()">Commencer</button>
+        <button class="btn-secondary"                    onclick="resetTimer()">RÃ©initialiser</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+     JOURNAL
+======================== -->
+<section id="journal">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Espace personnel</p>
+      <h2 class="section-title">Journal stoÃ¯cien</h2>
+      <div class="section-divider"></div>
+      <p style="color:var(--text-secondary);margin-bottom:2rem;font-size:.875rem;">
+        Vos entrÃ©es sont sauvegardÃ©es localement sur cet appareil. Personne d'autre ne peut les lire.
+      </p>
+    </div>
+    <div class="journal-wrap">
+      <div class="journal-form reveal">
+        <p class="journal-dateline" id="journalDate"></p>
+        <textarea class="journal-textarea" id="journalInput"
+          placeholder="Qu'avez-vous appris sur vous-mÃªme aujourd'hui ?" rows="5"></textarea>
+        <div class="journal-prompts">
+          <span class="prompt-chip" onclick="addPrompt('Ce que j\'ai bien fait : ')">â Bien fait</span>
+          <span class="prompt-chip" onclick="addPrompt('Ce que j\'aurais pu mieux faire : ')">â³ AmÃ©liorer</span>
+          <span class="prompt-chip" onclick="addPrompt('Hors de mon contrÃ´le : ')">â LÃ¢cher prise</span>
+          <span class="prompt-chip" onclick="addPrompt('Je suis reconnaissant pour : ')">â¥ Gratitude</span>
+          <span class="prompt-chip" onclick="addPrompt('L\'obstacle du jour Ã©tait : ')">â¬¥ Obstacle</span>
+        </div>
+        <div class="journal-bottom">
+          <span class="journal-stats" id="journalStats"></span>
+          <button class="btn-primary" onclick="saveJournal()">Sauvegarder</button>
+        </div>
+      </div>
+      <div id="journalEntries"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+     PROGRESSION
+======================== -->
+<section id="progression">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Votre parcours</p>
+      <h2 class="section-title">Suivi de progression</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="streak-wrap reveal">
+      <div class="streak-card">
+        <div class="streak-num" id="streakCount">0</div>
+        <div class="streak-label">Jours consÃ©cutifs</div>
+      </div>
+      <div class="streak-card">
+        <div class="streak-num" id="totalEntries">0</div>
+        <div class="streak-label">EntrÃ©es au journal</div>
+      </div>
+      <div class="streak-card">
+        <div class="streak-num" id="totalSessions">0</div>
+        <div class="streak-label">Sessions de mÃ©ditation</div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--text-secondary);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;opacity:.7;">
+      30 derniers jours
+    </p>
+    <div class="streak-calendar reveal" id="streakCalendar"></div>
+  </div>
+</section>
+
+<!-- ========================
+     RESSOURCES
+======================== -->
+<section id="ressources">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">BibliothÃ¨que</p>
+      <h2 class="section-title">Ressources essentielles</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="ressources-grid">
+      <a href="https://www.gutenberg.org/ebooks/author/1660" target="_blank" rel="noopener" class="ressource-card reveal">
+        <p class="ressource-type">ð Livre â Gratuit</p>
+        <h3 class="ressource-title">MÃ©ditations</h3>
+        <p class="ressource-author">Marc AurÃ¨le Â· PensÃ©es personnelles de l'empereur philosophe</p>
+      </a>
+      <a href="https://www.gutenberg.org/ebooks/45699" target="_blank" rel="noopener" class="ressource-card reveal">
+        <p class="ressource-type">ð Livre â Gratuit</p>
+        <h3 class="ressource-title">Manuel (Enchiridion)</h3>
+        <p class="ressource-author">ÃpictÃ¨te Â· Guide pratique de la libertÃ© intÃ©rieure</p>
+      </a>
+      <a href="https://www.gutenberg.org/ebooks/author/1062" target="_blank" rel="noopener" class="ressource-card reveal">
+        <p class="ressource-type">ð Livre â Gratuit</p>
+        <h3 class="ressource-title">Lettres Ã  Lucilius</h3>
+        <p class="ressource-author">SÃ©nÃ¨que Â· 124 lettres sur l'art de vivre</p>
+      </a>
+      <a href="https://www.gutenberg.org/ebooks/author/1062" target="_blank" rel="noopener" class="ressource-card reveal">
+        <p class="ressource-type">ð TraitÃ© â Gratuit</p>
+        <h3 class="ressource-title">De la briÃ¨vetÃ© de la vie</h3>
+        <p class="ressource-author">SÃ©nÃ¨que Â· Sur le temps et ce qu'on en fait</p>
+      </a>
+      <a href="#journal" class="ressource-card reveal">
+        <p class="ressource-type">âï¸ Outil â Sur KAIROS</p>
+        <h3 class="ressource-title">Journal stoÃ¯cien quotidien</h3>
+        <p class="ressource-author">RÃ©flexions et prises de conscience personnelles</p>
+      </a>
+      <a href="#minuteur" class="ressource-card reveal">
+        <p class="ressource-type">ð§ Outil â Sur KAIROS</p>
+        <h3 class="ressource-title">Minuteur de mÃ©ditation</h3>
+        <p class="ressource-author">1 Ã  20 minutes Â· Son de cloche Â· Hors-ligne</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+     FOOTER
+======================== -->
+<footer>
+  <p class="footer-logo">KAIROS</p>
+  <p class="footer-quote">"La vie est longue si l'on sait s'en servir." â SÃ©nÃ¨que</p>
+  <ul class="footer-links">
+    <li><a href="#hero">Accueil</a></li>
+    <li><a href="#citation">Citations</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#progression">Progression</a></li>
+    <li><a href="https://github.com/Macdubh28/kairos" target="_blank" rel="noopener">GitHub</a></li>
+  </ul>
+  <p class="footer-copy">Â© 2026 KAIROS â Tous droits rÃ©servÃ©s</p>
+</footer>
+
+
+<!-- ========================
+     JAVASCRIPT
+======================== -->
+<script>
+/* ============================================================
+   DATA â CITATIONS
+============================================================ */
+const QUOTES = [
+  { t:"Vous avez du pouvoir sur votre esprit, pas sur les Ã©vÃ©nements extÃ©rieurs. RÃ©alisez cela, et vous trouverez la force.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"Il ne faut pas s'exercer Ã  fuir la douleur, mais Ã  la supporter.", a:"ÃpictÃ¨te", s:"Entretiens" },
+  { t:"Ce n'est pas les Ã©vÃ©nements qui troublent les hommes, mais les jugements qu'ils portent sur les Ã©vÃ©nements.", a:"ÃpictÃ¨te", s:"Manuel" },
+  { t:"La fortune est d'une nature changeante, mais la sagesse est Ã©ternelle.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
+  { t:"Tout ce qui n'est pas avantageux Ã  la ruche n'est pas avantageux Ã  l'abeille.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"Ne gaspille pas le reste de ta vie Ã  des pensÃ©es sur les autres.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"On souffre plus dans l'imagination que dans la rÃ©alitÃ©.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
+  { t:"L'obstacle sur le chemin devient le chemin.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"Sois maÃ®tre de toi-mÃªme avant de vouloir diriger les autres.", a:"ÃpictÃ¨te", s:"Entretiens" },
+  { t:"Si ce n'est pas juste, ne le fais pas. Si ce n'est pas vrai, ne le dis pas.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"La vie est courte, mais l'art est long.", a:"SÃ©nÃ¨que", s:"De Brevitate Vitae" },
+  { t:"Persiste et rÃ©siste.", a:"ÃpictÃ¨te", s:"Entretiens" },
+  { t:"Le sage porte en lui le monde entier.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
+  { t:"Accepte les choses auxquelles le destin te lie, et aime les gens avec qui le destin t'unit.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"La libertÃ© n'est pas quelque chose que vous recevez d'un autre. Elle se conquiert.", a:"ÃpictÃ¨te", s:"Entretiens" },
+  { t:"Nusquam est qui ubique est â Celui qui est partout n'est nulle part.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
+  { t:"Commence par faire ce qui est nÃ©cessaire, puis ce qui est possible, et soudain tu feras l'impossible.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"Ce que nous appelons destin n'est que la rÃ©sultante de nos choix passÃ©s.", a:"SÃ©nÃ¨que", s:"De Providentia" },
+  { t:"Traite les hommes comme tu veux Ãªtre traitÃ©. Vis ainsi et tu vivras en accord avec la nature.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"La difficultÃ© de la vertu est ce qui la rend prÃ©cieuse.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
+  { t:"Deux choses rendent l'Ã¢me trÃ¨s forte : la foi en la vÃ©ritÃ© et la confiance en soi-mÃªme.", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"Aucun vent ne souffle en faveur de celui qui n'a pas de port de destination.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
+  { t:"Demande-toi Ã  chaque instant : est-ce que je suis capable de faire une chose bonne ici ?", a:"Marc AurÃ¨le", s:"MÃ©ditations" },
+  { t:"Ce qui est frappant dans la mort, c'est qu'elle met en Ã©vidence ce qui Ã©tait vraiment prÃ©cieux dans la vie.", a:"SÃ©nÃ¨que", s:"Lettres Ã  Lucilius" },
+];
+
+/* ============================================================
+   DATA â PRINCIPES
+============================================================ */
+const PRINCIPLES = [
+  { n:"I",   title:"La dichotomie du contrÃ´le", latin:"Hegemonia", desc:"Distinguer ce qui dÃ©pend de nous â jugements, dÃ©sirs, actions â de ce qui n'en dÃ©pend pas. Cette distinction est le fondement de toute libertÃ© intÃ©rieure." },
+  { n:"II",  title:"Amor Fati",                 latin:"Amor Fati",      desc:"Aimer son destin. Non pas le subir, ni mÃªme l'accepter passivement, mais l'embrasser pleinement, y compris ses Ã©preuves et ses obstacles." },
+  { n:"III", title:"Memento Mori",               latin:"Memento Mori",   desc:"Se souvenir que l'on est mortel. Ce rappel n'est pas morbide â il est libÃ©rateur. Il donne Ã  chaque moment son poids rÃ©el et Ã  chaque action son urgence vÃ©ritable." },
+  { n:"IV",  title:"Le moment prÃ©sent",          latin:"Nunc ipsum",     desc:"Vivre pleinement dans l'instant. Le passÃ© est rÃ©volu, le futur incertain. Seul le prÃ©sent est rÃ©el, et seul il mÃ©rite notre attention complÃ¨te." },
+  { n:"V",   title:"La vertu comme bien suprÃªme",latin:"Virtus sola bonum", desc:"La richesse et la gloire sont des prÃ©fÃ©rÃ©s â ni bons ni mauvais en soi. Seule la vertu â sagesse, justice, courage, tempÃ©rance â constitue le vrai bien." },
+  { n:"VI",  title:"L'obstacle est le chemin",   latin:"Per aspera",     desc:"Chaque obstacle devient l'occasion de dÃ©velopper une vertu. La rÃ©sistance forge le caractÃ¨re. On ne grandit pas malgrÃ© les difficultÃ©s, mais grÃ¢ce Ã  elles." },
+];
+
+/* ============================================================
+   QUOTES LOGIC
+============================================================ */
+let qIdx = 0;
+
+function dayOfYear() {
+  const now = new Date();
+  return Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
+}
+
+function showQuote(idx) {
+  const q = QUOTES[idx];
+  const el = document.getElementById('quoteText');
+  el.style.opacity = '0';
+  setTimeout(() => {
+    el.textContent = q.t;
+    document.getElementById('quoteAuthor').textContent = q.a;
+    document.getElementById('quoteSource').textContent = q.s;
+    document.getElementById('quoteCounter').textContent = (idx+1) + ' / ' + QUOTES.length;
+    el.style.opacity = '1';
+  }, 200);
+}
+function nextQuote()    { qIdx = (qIdx+1) % QUOTES.length; showQuote(qIdx); }
+function prevQuote()    { qIdx = (qIdx-1+QUOTES.length) % QUOTES.length; showQuote(qIdx); }
+function shuffleQuote() { qIdx = Math.floor(Math.random()*QUOTES.length); showQuote(qIdx); }
+
+function copyQuote() {
+  const q = QUOTES[qIdx];
+  const text = '"' + q.t + '" â ' + q.a + ', ' + q.s;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'CopiÃ© â';
+    setTimeout(() => btn.textContent = 'Copier', 2000);
+  });
+}
+
+/* ============================================================
+   PRINCIPLES RENDER
+============================================================ */
+function renderPrinciples() {
+  document.getElementById('principes-grid').innerHTML = PRINCIPLES.map((p,i) => `
+    <div class="principe-card reveal" style="transition-delay:${i*0.08}s">
+      <div class="principe-num">${p.n}</div>
+      <h3 class="principe-title">${p.title}</h3>
+      <p class="principe-latin">${p.latin}</p>
+      <p class="principe-desc">${p.desc}</p>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   TIMER LOGIC
+============================================================ */
+const CIRC = 2 * Math.PI * 120; // â 753.98
+let tDur = 60, tRem = 60, tInterval = null, tRunning = false;
+
+function setTimer(sec, btn) {
+  if (tRunning) return;
+  tDur = sec; tRem = sec;
+  document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  updateTimerUI();
+  setProgress(1);
+}
+function fmt(s) { return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+function updateTimerUI() { document.getElementById('timerDisplay').textContent = fmt(tRem); }
+function setProgress(frac) {
+  const p = document.getElementById('timerProg');
+  p.style.strokeDasharray  = CIRC;
+  p.style.strokeDashoffset = CIRC * (1-frac);
+}
+function toggleTimer() {
+  if (tRunning) {
+    clearInterval(tInterval); tRunning = false;
+    document.getElementById('timerStartBtn').textContent = 'Reprendre';
+  } else {
+    if (tRem === 0) resetTimer();
+    tRunning = true;
+    document.getElementById('timerStartBtn').textContent = 'Pause';
+    tInterval = setInterval(() => {
+      tRem--;
+      updateTimerUI();
+      setProgress(tRem / tDur);
+      if (tRem <= 0) {
+        clearInterval(tInterval); tRunning = false;
+        document.getElementById('timerStartBtn').textContent = 'TerminÃ©';
+        playBell();
+        bumpStat('kairos_sessions');
+        updateStats();
+      }
+    }, 1000);
+  }
+}
+function resetTimer() {
+  clearInterval(tInterval); tRunning = false; tRem = tDur;
+  updateTimerUI(); setProgress(1);
+  document.getElementById('timerStartBtn').textContent = 'Commencer';
+}
+function playBell() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0, .8, 1.6].forEach(offset => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.setValueAtTime(528, ctx.currentTime + offset);
+      o.frequency.exponentialRampToValueAtTime(330, ctx.currentTime + offset + 2.5);
+      g.gain.setValueAtTime(offset === 0 ? .4 : .25, ctx.currentTime + offset);
+      g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + offset + 3);
+      o.start(ctx.currentTime + offset); o.stop(ctx.currentTime + offset + 3);
+    });
+  } catch(e) {}
+}
+
+/* ============================================================
+   JOURNAL LOGIC
+============================================================ */
+function getEntries() { return JSON.parse(localStorage.getItem('kairos_journal') || '[]'); }
+function saveEntries(arr) { localStorage.setItem('kairos_journal', JSON.stringify(arr)); }
+
+function saveJournal() {
+  const v = document.getElementById('journalInput').value.trim();
+  if (!v) return;
+  const entries = getEntries();
+  entries.unshift({
+    id: Date.now(),
+    text: v,
+    date: new Date().toLocaleDateString('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' }),
+    ts: Date.now()
+  });
+  saveEntries(entries);
+  document.getElementById('journalInput').value = '';
+  markToday();
+  renderJournal();
+  updateStats();
+}
+
+function deleteEntry(id) {
+  saveEntries(getEntries().filter(e => e.id !== id));
+  renderJournal(); updateStats();
+}
+
+function renderJournal() {
+  const entries = getEntries();
+  const el = document.getElementById('journalEntries');
+  if (!entries.length) {
+    el.innerHTML = '<p class="journal-empty">Votre journal est vide. Commencez Ã  Ã©crireâ¦</p>';
+    return;
+  }
+  el.innerHTML = entries.map(e => `
+    <div class="journal-entry">
+      <p class="journal-entry-date">${e.date}</p>
+      <p class="journal-entry-text">${e.text.replace(/\n/g,'<br>')}</p>
+      <button class="journal-del" onclick="deleteEntry(${e.id})">â</button>
+    </div>
+  `).join('');
+  document.getElementById('journalStats').textContent = entries.length + ' entrÃ©e' + (entries.length>1?'s':'');
+}
+
+function addPrompt(txt) {
+  const ta = document.getElementById('journalInput');
+  ta.value = ta.value ? ta.value + '\n' + txt : txt;
+  ta.focus();
+}
+
+/* ============================================================
+   STREAK & STATS
+============================================================ */
+function bumpStat(key) {
+  const v = parseInt(localStorage.getItem(key)||'0');
+  localStorage.setItem(key, v+1);
+}
+
+function markToday() {
+  const key = 'kairos_days';
+  const days = JSON.parse(localStorage.getItem(key)||'[]');
+  const today = new Date().toDateString();
+  if (!days.includes(today)) { days.push(today); localStorage.setItem(key, JSON.stringify(days)); }
+}
+
+function computeStreak() {
+  const days = JSON.parse(localStorage.getItem('kairos_days')||'[]')
+    .map(d => new Date(d).setHours(0,0,0,0)).sort((a,b)=>b-a);
+  if (!days.length) return 0;
+  const today = new Date().setHours(0,0,0,0);
+  if (days[0] !== today) return 0;
+  let streak = 1, DAY = 86400000;
+  for (let i=1; i<days.length; i++) {
+    if (days[i-1] - days[i] === DAY) streak++;
+    else break;
+  }
+  return streak;
+}
+
+function updateStats() {
+  document.getElementById('streakCount').textContent  = computeStreak();
+  document.getElementById('totalEntries').textContent = getEntries().length;
+  document.getElementById('totalSessions').textContent = localStorage.getItem('kairos_sessions')||'0';
+}
+
+function renderCalendar() {
+  const cal = document.getElementById('streakCalendar');
+  const days = JSON.parse(localStorage.getItem('kairos_days')||'[]')
+    .map(d => new Date(d).toDateString());
+  const today = new Date();
+  let html = '';
+  for (let i=29; i>=0; i--) {
+    const d = new Date(today); d.setDate(d.getDate()-i);
+    const isToday   = i===0;
+    const isActive  = days.includes(d.toDateString());
+    html += `<div class="cal-day ${isToday?'today':isActive?'active':''}" title="${d.toLocaleDateString('fr-FR')}"></div>`;
+  }
+  cal.innerHTML = html;
+}
+
+/* ============================================================
+   NAVIGATION LOGIC
+============================================================ */
+function setupNav() {
+  const nb = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nb.classList.toggle('scrolled', window.scrollY > 60);
+    highlightNav();
+  });
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+}
+function highlightNav() {
+  const ids = ['philosophie','citation','principes','pratiques','minuteur','journal','progression','ressources'];
+  let current = '';
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 220) current = id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+  });
+}
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+function setupReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: .08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+/* =========================================================
+   INIT
+============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Quote of the day
+  qIdx = dayOfYear() % QUOTES.length;
+  showQuote(qIdx);
+
+  // Hero quote (different index)
+  const hq = QUOTES[(qIdx + 5) % QUOTES.length];
+  document.getElementById('heroText').textContent = hq.t;
+  document.getElementById('heroCite').textContent = 'â ' + hq.a;
+
+  // Principles
+  renderPrinciples();
+
+  // Timer init
+  updateTimerUI(); setProgress(1);
+
+  // Journal
+  document.getElementById('journalDate').textContent =
+    new Date().toLocaleDateString('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  renderJournal();
+
+  // Stats & calendar
+  updateStats();
+  renderCalendar();
+
+  // Nav
+  setupNav();
+
+  // Reveal (slight delay so dynamically rendered cards are in DOM)
+  setTimeout(setupReveal, 120);
+
+  // PWA Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+});
+</script>
+
+</body>
+</html>
